@@ -17,6 +17,9 @@ public record HotelRequestDto(
         @NotBlank(message = "Hotel's address is blank")
         String address,
 
+        @NotNull(message = "Hotel's rating is blank")
+        Double rating,
+
         @NotNull(message = "Hotel's distance from center is null")
         @PositiveOrZero(message = "Distance can not be negative")
         Double distanceFromCenter
