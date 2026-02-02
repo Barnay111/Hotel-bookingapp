@@ -5,7 +5,6 @@ import com.hotel.hotelbooking.dto.room.RoomResponseDto;
 import com.hotel.hotelbooking.entity.Hotel;
 import com.hotel.hotelbooking.entity.Room;
 import com.hotel.hotelbooking.exception.EntityNotFoundException;
-import com.hotel.hotelbooking.mapper.RoomMapper;
 import com.hotel.hotelbooking.mapper.RoomMapperImpl;
 import com.hotel.hotelbooking.repository.RoomRepository;
 import org.junit.jupiter.api.Test;
@@ -55,7 +54,7 @@ public class RoomServiceTest {
 
         when(roomRepository.findById(roomId)).thenReturn(Optional.of(room));
 
-        RoomResponseDto result = roomService.getById(roomId);
+        RoomResponseDto result = roomService.getRoomById(roomId);
 
         assertNotNull(result);
         assertEquals("Presidential Suite", result.name());
@@ -68,7 +67,7 @@ public class RoomServiceTest {
         Long roomId = 30L;
         when(roomRepository.findById(roomId)).thenReturn(Optional.empty());
 
-        assertThrows(EntityNotFoundException.class, () -> roomService.getById(roomId));
+        assertThrows(EntityNotFoundException.class, () -> roomService.getRoomById(roomId));
     }
 
     @Test
@@ -87,7 +86,7 @@ public class RoomServiceTest {
         hotel.setId(2L);
         hotel.setName("Marriott Marquis New York");
 
-        when(hotelService.getHotelById(2L)).thenReturn(hotel);
+        when(hotelService.getHotel(2L)).thenReturn(hotel);
         when(roomRepository.save(any(Room.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         RoomResponseDto result = roomService.createRoom(requestDto);
@@ -125,7 +124,7 @@ public class RoomServiceTest {
         Hotel newHotel = new Hotel();
         newHotel.setId(3L);
         newHotel.setName("Atlantis Paradise Island");
-        when(hotelService.getHotelById(3L)).thenReturn(newHotel);
+        when(hotelService.getHotel(3L)).thenReturn(newHotel);
         when(roomRepository.save(any(Room.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         RoomResponseDto updated = roomService.updateRoom(updateDto, roomId);

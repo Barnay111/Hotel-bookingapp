@@ -24,8 +24,8 @@ public class HotelService {
     private final HotelRepository hotelRepository;
     private final HotelMapper hotelMapper;
 
-    public HotelResponseDto getHotel(Long id) {
-        Hotel hotel = getHotelById(id);
+    public HotelResponseDto getHotelById(Long id) {
+        Hotel hotel = getHotel(id);
 
         return hotelMapper.toResponseDto(hotel);
     }
@@ -40,21 +40,21 @@ public class HotelService {
 
     @Transactional
     public HotelResponseDto updateHotel(Long id, HotelRequestDto requestDto) {
-        Hotel hotel = getHotelById(id);
+        Hotel hotel = getHotel(id);
         hotelMapper.updateHotel(requestDto, hotel);
         hotelRepository.save(hotel);
 
         return hotelMapper.toResponseDto(hotel);
     }
 
-    public Hotel getHotelById(Long hotelId) {
+    public Hotel getHotel(Long hotelId) {
         return hotelRepository.findById(hotelId).orElseThrow(
                 () -> new EntityNotFoundException("Hotel with id " + hotelId + " does not exist"));
     }
 
     @Transactional
     public void deleteHotel(Long id) {
-        Hotel hotel = getHotelById(id);
+        Hotel hotel = getHotel(id);
         hotelRepository.delete(hotel);
     }
 

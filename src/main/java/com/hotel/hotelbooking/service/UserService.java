@@ -86,14 +86,13 @@ public class UserService {
         userRepository.delete(user);
     }
 
-
     public List<UserDto> getAllUsers() {
         return userRepository.findAll().stream()
                 .map(userMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    private User getUser(Long userId) {
+    public User getUser(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User with id" + userId + " does not exist"));
     }

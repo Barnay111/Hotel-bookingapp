@@ -48,7 +48,7 @@ public class HotelServiceTest {
 
         when(hotelRepository.findById(id)).thenReturn(Optional.of(hotel));
 
-        HotelResponseDto result = hotelService.getHotel(id);
+        HotelResponseDto result = hotelService.getHotelById(id);
         assertNotNull(hotel);
         assertEquals("Four Seasons", hotel.getName());
         verify(hotelRepository).findById(id);
@@ -60,7 +60,7 @@ public class HotelServiceTest {
         Long id = 125L;
         when(hotelRepository.findById(id)).thenReturn(Optional.empty());
 
-        assertThrows(EntityNotFoundException.class, () -> hotelService.getHotel(id));
+        assertThrows(EntityNotFoundException.class, () -> hotelService.getHotelById(id));
     }
 
     @Test
