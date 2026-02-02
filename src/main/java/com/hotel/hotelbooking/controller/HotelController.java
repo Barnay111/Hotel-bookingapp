@@ -27,7 +27,7 @@ public class HotelController {
 
     @GetMapping("/{id}")
     public HotelResponseDto getHotel(@PathVariable Long id) {
-        return hotelService.getHotel(id);
+        return hotelService.getHotelById(id);
     }
 
     @PostMapping

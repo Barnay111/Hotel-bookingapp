@@ -21,14 +21,14 @@ public class RoomService {
     private final HotelService hotelService;
 
     @Transactional(readOnly = true)
-    public RoomResponseDto getById(Long id) {
-        Room room = getRoomById(id);
+    public RoomResponseDto getRoomById(Long id) {
+        Room room = getRoom(id);
         return roomMapper.toDto(room);
     }
 
     public RoomResponseDto createRoom(RoomRequestDto requestDto) {
         Room room = roomMapper.toEntity(requestDto);
-        Hotel hotel = hotelService.getHotelById(requestDto.hotelId());
+        Hotel hotel = hotelService.getHotel(requestDto.hotelId());
         room.setHotel(hotel);
         Room savedRoom = roomRepository.save(room);
 
@@ -36,10 +36,10 @@ public class RoomService {
     }
 
     public RoomResponseDto updateRoom(RoomRequestDto requestDto, Long id) {
-        Room room = getRoomById(id);
+        Room room = getRoom(id);
         roomMapper.updateRoom(requestDto, room);
 
-        Hotel hotel = hotelService.getHotelById(requestDto.hotelId());
+        Hotel hotel = hotelService.getHotel(requestDto.hotelId());
         room.setHotel(hotel);
         Room savedRoom = roomRepository.save(room);
 
@@ -47,12 +47,12 @@ public class RoomService {
     }
 
     public void deleteRoom(Long roomId) {
-        Room room = getRoomById(roomId);
+        Room room = getRoom(roomId);
         roomRepository.delete(room);
     }
 
-    public Room getRoomById(Long roomId) {
+    public Room getRoom(Long roomId) {
         return roomRepository.findById(roomId)
-                .orElseThrow(() -> new EntityNotFoundException("Room with id"));
+                .orElseThrow(() -> new EntityNotFoundException("Room with id: " + roomId + " does not exist"));
     }
 }
