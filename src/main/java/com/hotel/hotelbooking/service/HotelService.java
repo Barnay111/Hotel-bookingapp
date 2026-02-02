@@ -47,7 +47,7 @@ public class HotelService {
         return hotelMapper.toResponseDto(hotel);
     }
 
-    private Hotel getHotelById(Long hotelId) {
+    public Hotel getHotelById(Long hotelId) {
         return hotelRepository.findById(hotelId).orElseThrow(
                 () -> new EntityNotFoundException("Hotel with id " + hotelId + " does not exist"));
     }
