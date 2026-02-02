@@ -16,6 +16,7 @@ public interface RoomMapper {
 
 
     @Mapping(target = "hotel", ignore = true)
+    @Mapping(target = "id", ignore = true)
     void updateRoom(RoomRequestDto dto, @MappingTarget Room room);
 
     @Mapping(target = "hotelId", source = "hotel.id")
