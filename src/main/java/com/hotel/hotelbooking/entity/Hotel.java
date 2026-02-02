@@ -39,8 +39,8 @@ public class Hotel {
     private Double distanceFromCenter;
 
     @Column(precision = 2, scale = 1)
-    private Double rating;
+    private double rating = 0.0;
 
-    @Column(name = "reviews_count")
-    private Integer reviewsCount;
+    @Column(name = "number_of_ratings")
+    private int numberOfRating = 0;
 }

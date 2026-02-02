@@ -8,6 +8,6 @@ public record HotelResponseDto(
         String address,
         Double distanceFromCenter,
         Double rating,
-        Integer reviewsCount
+        Integer numberOfRating
 ) {
 }
