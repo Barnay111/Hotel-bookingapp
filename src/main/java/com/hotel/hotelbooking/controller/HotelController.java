@@ -20,7 +20,7 @@ import org.springframework.data.domain.Pageable;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/hotels")
+@RequestMapping("/api/hotels")
 public class HotelController {
 
     private final HotelService hotelService;

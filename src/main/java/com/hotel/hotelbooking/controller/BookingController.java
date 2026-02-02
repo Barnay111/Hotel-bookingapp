@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/bookings")
+@RequestMapping("/api/bookings")
 public class BookingController {
     private final BookingService bookingService;
 
@@ -33,7 +33,6 @@ public class BookingController {
     ) {
         return bookingService.createBooking(dto);
     }
-
 
     @GetMapping
     public List<BookingResponseDto> getAllBookings() {
