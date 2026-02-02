@@ -11,6 +11,7 @@ import com.hotel.hotelbooking.exception.EntityNotFoundException;
 import com.hotel.hotelbooking.mapper.UserMapper;
 import com.hotel.hotelbooking.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public UserDto getUserById(Long id) {
         User user = getUser(id);
@@ -36,6 +38,7 @@ public class UserService {
         }
 
         User user = userMapper.toEntity(dto);
+        user.setPassword(passwordEncoder.encode(dto.password()));
         User saved = userRepository.save(user);
         return userMapper.toDto(saved);
     }
@@ -43,11 +46,11 @@ public class UserService {
     public UserDto updatePassword(Long id, UpdatePasswordDto dto) {
         User user = getUser(id);
 
-        if (!user.getPassword().equals(dto.oldPassword())) {
+        if (!passwordEncoder.matches(dto.oldPassword(), user.getPassword())) {
             throw new IllegalArgumentException("Old password is incorrect");
         }
 
-        user.setPassword(dto.newPassword());
+        user.setPassword(passwordEncoder.encode(dto.newPassword()));
         User updated = userRepository.save(user);
         return userMapper.toDto(updated);
     }
