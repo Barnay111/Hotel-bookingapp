@@ -1,3 +1,17 @@
 spring:
-  application:
-    name: hotel-booking
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: ${kafka.group-id:hotel-group}
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+kafka:
+  topics:
+    user-events: user-events
+    booking-events: booking-events
+  group-id: hotel-group
