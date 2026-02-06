@@ -5,20 +5,20 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
 public record HotelRequestDto(
-        @NotBlank(message = "Hotel's name is blank")
+        @NotBlank(message = "Hotel name is required")
         String name,
 
-        @NotBlank(message = "Hotel's headline is blank")
+        @NotBlank(message = "Headline is required")
         String headline,
 
-        @NotBlank(message = "Hotel's city is blank")
+        @NotBlank(message = "City is required")
         String city,
 
-        @NotBlank(message = "Hotel's address is blank")
+        @NotBlank(message = "Address is required")
         String address,
 
-        @NotNull(message = "Hotel's distance from center is null")
-        @PositiveOrZero(message = "Distance can not be negative")
+        @NotNull(message = "Distance from center is required")
+        @PositiveOrZero(message = "Distance from center must be zero or positive")
         Double distanceFromCenter
 ) {
 }

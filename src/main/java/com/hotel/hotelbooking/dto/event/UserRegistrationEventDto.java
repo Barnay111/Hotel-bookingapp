@@ -1,4 +1,4 @@
 package com.hotel.hotelbooking.dto.event;
 
-public record UserRegistrationEventDto() {
+public record UserRegistrationEventDto(Long userId) {
 }
