@@ -25,7 +25,6 @@ public interface BookingMapper {
     @Mapping(source = "user.username", target = "username")
     BookingFullResponseDto toFullDto(Booking booking);
 
-    List<BookingFullResponseDto> toFullDtoList(List<Booking> bookings);
-
     List<BookingResponseDto> toDtoList(List<Booking> bookings);
+    List<BookingFullResponseDto> toFullDtoList(List<Booking> bookings);
 }

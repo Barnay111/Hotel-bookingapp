@@ -37,6 +37,7 @@ public interface UserMapper {
     @Mapping(target = "updatedAt", ignore = true)
     void updateEntityFromEmailDto(UpdateEmailDto dto, @MappingTarget User user);
 
+
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "email", ignore = true)
@@ -45,6 +46,7 @@ public interface UserMapper {
     @Mapping(target = "updatedAt", ignore = true)
     void updateEntityFromUsernameDto(UpdateUsernameDto dto, @MappingTarget User user);
 
+
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "email", ignore = true)
@@ -52,5 +54,4 @@ public interface UserMapper {
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     void updateEntityFromRoleTypeDto(UpdateRoleTypeDto dto, @MappingTarget User user);
-
 }

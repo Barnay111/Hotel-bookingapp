@@ -22,12 +22,10 @@ import java.util.List;
 public class BookingController {
     private final BookingService bookingService;
 
-
     @GetMapping("/{id}")
-    public BookingResponseDto getBookingById(@PathVariable Long id) {
+    public BookingResponseDto getById(@PathVariable Long id) {
         return bookingService.getBookingById(id);
     }
-
 
     @PostMapping
     public BookingResponseDto createBooking(
