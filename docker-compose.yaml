@@ -30,7 +30,7 @@ services:
       interval: 10s
       retries: 5
 
-  # Zookeeper для Kafka
+
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
@@ -44,7 +44,6 @@ services:
       interval: 10s
       retries: 5
 
-  # Kafka
   kafka:
     image: confluentinc/cp-kafka:latest
     container_name: kafka

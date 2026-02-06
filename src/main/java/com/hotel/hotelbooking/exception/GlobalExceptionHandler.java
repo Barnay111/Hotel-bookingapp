@@ -30,9 +30,13 @@ public class GlobalExceptionHandler {
         return build(HttpStatus.BAD_REQUEST, "Validation failed", request, details);
     }
 
-    @ExceptionHandler({IllegalArgumentException.class, ConstraintViolationException.class})
+    @ExceptionHandler({
+            IllegalArgumentException.class,
+            ConstraintViolationException.class,
+            IllegalStateException.class
+    })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponseDto handleBadRequest(Exception ex, HttpServletRequest request) {
+    public ErrorResponseDto handleClientErrors(Exception ex, HttpServletRequest request) {
         return build(HttpStatus.BAD_REQUEST, ex.getMessage(), request, null);
     }
 
@@ -41,7 +45,6 @@ public class GlobalExceptionHandler {
     public ErrorResponseDto handleServerError(Exception ex, HttpServletRequest request) {
         return build(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", request, null);
     }
-
 
     private ErrorResponseDto build(HttpStatus status, String message, HttpServletRequest request, List<String> details) {
         return new ErrorResponseDto(LocalDateTime.now(), status.value(), status.getReasonPhrase(), message, request.getRequestURI(), details);

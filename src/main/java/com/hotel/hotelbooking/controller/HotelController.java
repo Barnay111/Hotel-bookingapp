@@ -4,7 +4,6 @@ import com.hotel.hotelbooking.dto.hotel.HotelListResponseDto;
 import com.hotel.hotelbooking.dto.hotel.HotelRatingDto;
 import com.hotel.hotelbooking.dto.hotel.HotelRequestDto;
 import com.hotel.hotelbooking.dto.hotel.HotelResponseDto;
-import com.hotel.hotelbooking.entity.Hotel;
 import com.hotel.hotelbooking.filter.HotelFilterDto;
 import com.hotel.hotelbooking.service.HotelService;
 import jakarta.validation.Valid;
@@ -96,5 +95,4 @@ public class HotelController {
 
         return hotelService.getAllHotelsFiltered(filter, pageable);
     }
-
 }

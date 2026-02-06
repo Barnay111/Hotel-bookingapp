@@ -13,6 +13,7 @@ import com.hotel.hotelbooking.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,11 +25,13 @@ public class UserService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
+    @Transactional(readOnly = true)
     public UserDto getUserById(Long id) {
         User user = getUser(id);
         return userMapper.toDto(user);
     }
 
+    @Transactional
     public UserDto createUser(CreateUserDto dto) {
         if (userRepository.existsByUsername(dto.username())) {
             throw new IllegalArgumentException("Username already exists");
@@ -43,6 +46,7 @@ public class UserService {
         return userMapper.toDto(saved);
     }
 
+    @Transactional
     public UserDto updatePassword(Long id, UpdatePasswordDto dto) {
         User user = getUser(id);
 
@@ -55,6 +59,7 @@ public class UserService {
         return userMapper.toDto(updated);
     }
 
+    @Transactional
     public UserDto updateEmail(Long id, UpdateEmailDto dto) {
         if (userRepository.existsByEmail(dto.newEmail())) {
             throw new IllegalArgumentException("Email already exists");
@@ -66,6 +71,7 @@ public class UserService {
         return userMapper.toDto(updated);
     }
 
+    @Transactional
     public UserDto updateUsername(Long id, UpdateUsernameDto dto) {
         if (userRepository.existsByUsername(dto.username())) {
             throw new IllegalArgumentException("Username already exists");
@@ -77,6 +83,7 @@ public class UserService {
         return userMapper.toDto(updated);
     }
 
+    @Transactional
     public UserDto updateRole(Long id, UpdateRoleTypeDto dto) {
         User user = getUser(id);
         user.setRoleType(dto.roleType());
@@ -84,11 +91,13 @@ public class UserService {
         return userMapper.toDto(updated);
     }
 
+    @Transactional
     public void deleteUser(Long id) {
         User user = getUser(id);
         userRepository.delete(user);
     }
 
+    @Transactional(readOnly = true)
     public List<UserDto> getAllUsers() {
         return userRepository.findAll().stream()
                 .map(userMapper::toDto)

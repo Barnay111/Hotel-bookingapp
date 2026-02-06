@@ -12,29 +12,29 @@ import java.util.List;
 
 public record RoomRequestDto(
 
-        @NotBlank(message = "Name must not be blank")
-        @Size(max = 100, message = "Name must not exceed 100 characters")
+        @NotBlank(message = "Room is required")
+        @Size(max = 100, message = "Room name must not exceed 100 characters")
         String name,
 
-        @NotBlank(message = "Description must not be blank")
+        @NotBlank(message = "Description is required")
         @Size(max = 1000, message = "Description must not exceed 1000 characters")
         String description,
 
-        @NotBlank(message = "Room number must not be blank")
+        @NotBlank(message = "Room number is required")
         @Size(max = 20, message = "Room number must not exceed 20 characters")
         String number,
 
         @NotNull(message = "Price is required")
-        @Positive(message = "Price must be positive")
+        @Positive(message = "Price must be greater than 0")
         BigDecimal price,
 
-        @Positive(message = "Max people must be positive")
-        @Max(value = 20, message = "Max people must not exceed 20")
+        @Positive(message = "Maximum number of guests must be greater than 0")
+        @Max(value = 20, message = "Maximum number of guests must not exceed 20")
         int maxPeople,
 
         List<LocalDate> unavailableDates,
 
-        @NotNull(message = "Hotel id is required")
+        @NotNull(message = "Hotel ID is required")
         Long hotelId
 ) {
 }
