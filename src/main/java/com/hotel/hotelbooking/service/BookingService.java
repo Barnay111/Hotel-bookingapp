@@ -55,6 +55,7 @@ public class BookingService {
         return bookingMapper.toDtoList(bookingRepository.findAll());
     }
 
+    @Transactional(readOnly = true)
     public BookingResponseDto getBookingById(Long bookingId) {
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new EntityNotFoundException("Booking with id: " + bookingId + " does not exist"));

@@ -80,15 +80,13 @@ public class HotelServiceTest {
                         "Stylish boutique hotel in Birmingham",
                         "Birmingham",
                         "65 Highfield Rd, Edgbaston, Birmingham B15 3DP",
-                        4.7,
-                        100.23
+                        4.7
                 );
         HotelResponseDto updated = hotelService.updateHotel(id, updateDto);
 
         assertEquals(updateDto.name(), updated.name());
         assertEquals(updateDto.city(), updated.city());
         assertEquals(updateDto.address(), updated.address());
-        assertEquals(updateDto.rating(), updated.rating());
         assertEquals(updateDto.distanceFromCenter(), updated.distanceFromCenter());
 
         verify(hotelRepository).save(any(Hotel.class));
