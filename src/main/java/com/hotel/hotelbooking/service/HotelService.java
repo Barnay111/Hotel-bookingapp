@@ -6,7 +6,7 @@ import com.hotel.hotelbooking.dto.hotel.HotelRequestDto;
 import com.hotel.hotelbooking.dto.hotel.HotelResponseDto;
 import com.hotel.hotelbooking.entity.Hotel;
 import com.hotel.hotelbooking.exception.EntityNotFoundException;
-import com.hotel.hotelbooking.exception.IllegalArgumentException;
+import com.hotel.hotelbooking.exception.InvalidRequestException;
 import com.hotel.hotelbooking.filter.HotelFilterDto;
 import com.hotel.hotelbooking.mapper.HotelMapper;
 import com.hotel.hotelbooking.repository.HotelRepository;
@@ -83,7 +83,7 @@ public class HotelService {
         int newMark = ratingDto.mark();
 
         if (newMark < MIN_RATING || newMark > MAX_RATING) {
-            throw new IllegalArgumentException("Rating must be between " + MIN_RATING + " and " + MAX_RATING);
+            throw new InvalidRequestException("Rating must be between " + MIN_RATING + " and " + MAX_RATING);
         }
 
         double totalRating = hotel.getRating() * hotel.getNumberOfRating();
