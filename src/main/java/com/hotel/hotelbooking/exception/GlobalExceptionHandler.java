@@ -31,9 +31,9 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({
-            IllegalArgumentException.class,
+            InvalidRequestException.class,
             ConstraintViolationException.class,
-            IllegalStateException.class
+            BookingConflictException.class
     })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponseDto handleClientErrors(Exception ex, HttpServletRequest request) {

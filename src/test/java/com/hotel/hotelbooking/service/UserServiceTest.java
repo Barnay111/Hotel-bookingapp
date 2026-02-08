@@ -3,7 +3,6 @@ package com.hotel.hotelbooking.service;
 import com.hotel.hotelbooking.dto.user.*;
 import com.hotel.hotelbooking.entity.User;
 import com.hotel.hotelbooking.enums.RoleType;
-import com.hotel.hotelbooking.exception.EntityNotFoundException;
 import com.hotel.hotelbooking.mapper.UserMapperImpl;
 import com.hotel.hotelbooking.repository.UserRepository;
 import org.junit.jupiter.api.Test;

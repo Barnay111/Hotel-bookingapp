@@ -6,7 +6,7 @@ import com.hotel.hotelbooking.entity.Booking;
 import com.hotel.hotelbooking.entity.Room;
 import com.hotel.hotelbooking.entity.User;
 import com.hotel.hotelbooking.exception.EntityNotFoundException;
-import com.hotel.hotelbooking.exception.IllegalStateException;
+import com.hotel.hotelbooking.exception.BookingConflictException;
 import com.hotel.hotelbooking.mapper.BookingMapperImpl;
 import com.hotel.hotelbooking.repository.BookingRepository;
 import org.junit.jupiter.api.Test;
@@ -84,8 +84,8 @@ public class BookingServiceTest {
                 LocalDate.now().plusDays(1)
         );
 
-        IllegalStateException exception = assertThrows(
-                IllegalStateException.class,
+        BookingConflictException exception = assertThrows(
+                BookingConflictException.class,
                 () -> bookingService.createBooking(dto)
         );
 
@@ -111,8 +111,8 @@ public class BookingServiceTest {
         when(userService.getUser(dto.userId())).thenReturn(user);
         when(bookingRepository.existsConflict(dto.roomId(), dto.checkIn(), dto.checkOut())).thenReturn(true);
 
-        IllegalStateException exception = assertThrows(
-                IllegalStateException.class,
+        BookingConflictException exception = assertThrows(
+                BookingConflictException.class,
                 () -> bookingService.createBooking(dto)
         );
 

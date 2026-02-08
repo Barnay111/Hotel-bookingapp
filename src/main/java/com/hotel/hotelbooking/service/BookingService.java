@@ -7,7 +7,7 @@ import com.hotel.hotelbooking.entity.Booking;
 import com.hotel.hotelbooking.entity.Room;
 import com.hotel.hotelbooking.entity.User;
 import com.hotel.hotelbooking.exception.EntityNotFoundException;
-import com.hotel.hotelbooking.exception.IllegalStateException;
+import com.hotel.hotelbooking.exception.BookingConflictException;
 import com.hotel.hotelbooking.mapper.BookingMapper;
 import com.hotel.hotelbooking.repository.BookingRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ public class BookingService {
     public BookingResponseDto createBooking(BookingRequestDto dto) {
 
         if (!dto.checkOut().isAfter(dto.checkIn())) {
-            throw new IllegalStateException("Check-out date must be after check-in date");
+            throw new BookingConflictException("Check-out date must be after check-in date");
         }
 
         Room room = roomService.getRoom(dto.roomId());
@@ -39,7 +39,7 @@ public class BookingService {
         );
 
         if (conflict) {
-            throw new IllegalStateException("Room is already booked for the selected dates");
+            throw new BookingConflictException("Room is already booked for the selected dates");
         }
 
         Booking booking = bookingMapper.toEntity(dto);
